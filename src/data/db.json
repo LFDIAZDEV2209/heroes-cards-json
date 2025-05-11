@@ -1,0 +1,64 @@
+{
+  "heroes": [
+    {
+      "id": "1",
+      "name": "Clark Kent",
+      "alias": "Superman",
+      "house": "DC",
+      "ageAppearance": 1938,
+      "description": "Superfuerza, vuelo, visión de calor, invulnerabilidad",
+      "fullDescription": "El último hijo de Krypton, enviado a la Tierra para convertirse en su protector. Criado en Smallville, lucha por la justicia como Superman.",
+      "image": "/src/img/superman.jpeg"
+    },
+    {
+      "name": "Diana Prince",
+      "alias": "aleja",
+      "house": "DC",
+      "ageAppearance": "1941",
+      "description": "Superfuerza, braceletes indestructibles, lazo de la verdad",
+      "fullDescription": "Princesa amazona de Themyscira, hija de Hipólita. Defensora de la paz y embajadora entre los mundos de los dioses y los hombres.",
+      "image": "/src/img/wonder-woman.jpeg",
+      "id": "3"
+    },
+    {
+      "id": "4",
+      "name": "Tony Stark",
+      "alias": "Iron Man",
+      "house": "Marvel",
+      "ageAppearance": 1963,
+      "description": "Genio inventor, armadura tecnológica, ingeniero",
+      "fullDescription": "Industrial multimillonario que construye una armadura para salvar su vida y luego la usa para proteger al mundo como Iron Man.",
+      "image": "/src/img/iron-man.jpeg"
+    },
+    {
+      "id": "6",
+      "name": "Wade Wilson",
+      "alias": "Deadpool",
+      "house": "Marvel",
+      "ageAppearance": 1991,
+      "description": "Regeneración, habilidades de combate, cuarta pared",
+      "fullDescription": "Mercenario con un sentido del humor retorcido y habilidades regenerativas que le permiten sobrevivir a casi cualquier herida.",
+      "image": "/src/img/deadpool.jpeg"
+    },
+    {
+      "id": "7",
+      "name": "Barry Allen",
+      "alias": "Flash",
+      "house": "DC",
+      "ageAppearance": 1956,
+      "description": "Supervelocidad, vibración molecular, viaje en el tiempo",
+      "fullDescription": "Científico forense que obtiene velocidad sobrehumana tras un accidente con productos químicos. Protector de Central City.",
+      "image": "/src/img/flash.jpeg"
+    },
+    {
+      "id": "8",
+      "name": "Natasha Romanoff",
+      "alias": "Black Widow",
+      "house": "Marvel",
+      "ageAppearance": 1964,
+      "description": "Maestra espía, combate cuerpo a cuerpo, infiltración",
+      "fullDescription": "Ex-espía rusa y una de las agentes más talentosas de S.H.I.E.L.D., miembro clave de los Vengadores.",
+      "image": "/src/img/black-widow.jpeg"
+    }
+  ]
+}
