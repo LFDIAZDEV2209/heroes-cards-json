@@ -38,7 +38,7 @@ Heroes Cards JSON es una aplicación web moderna que permite visualizar, crear, 
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/tu-usuario/heroes-cards-json.git
+git clone https://github.com/LFDIAZDEV2209/heroes-cards-json.git
 ```
 
 2. Instala las dependencias:
@@ -107,7 +107,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 👥 Autor
 
-Tu Nombre - [@tu-usuario](https://github.com/tu-usuario)
+LFDIAZDEV2209 - [@LFDIAZDEV2209](https://github.com/LFDIAZDEV2209)
 
 ---
 
