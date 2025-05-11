@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap");
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .animate-scaleIn {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
+
+@layer base {
+  body {
+    font-family: "Comic Neue", cursive;
+    background-image: url("/placeholder.svg?height=500&width=500&query=comic%20book%20dots%20pattern");
+    background-color: #f8f8f8;
+    min-height: 100vh;
+    position: relative;
+    padding: 30px 30px 80px 30px;
+    overflow: hidden auto;
+  }
+}
+
+@layer components {
+
+  .search-container {
+    @apply bg-yellow-400 p-6 shadow-lg mb-8 border-b-4 border-black;
+  }
+
+  .search-container h1 {
+    font-family: "Bangers", cursive;
+    @apply text-5xl text-center mb-4 text-red-600 tracking-wider;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+
+  /* Comic card styling */
+  .comic-card {
+    @apply relative bg-white rounded-none transform transition-all duration-300 min-w-0;
+    box-shadow: 8px 8px 0px #000;
+    border: 3px solid black;
+    transform-origin: center;
+  }
+
+  .comic-card:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 12px 12px 0px #000;
+  }
+
+  .comic-card-header {
+    font-family: "Bangers", cursive;
+    @apply bg-red-600 text-white text-2xl p-3 text-center uppercase tracking-wider;
+    text-shadow: 2px 2px 0 #000;
+    clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+  }
+
+  .comic-card-image {
+    @apply relative mt-0.5 h-64 w-full bg-cover bg-center border-y-4 border-black;
+  }
+
+  .comic-card-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/placeholder.svg?height=100&width=100&query=halftone%20dots%20pattern%20transparent");
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .comic-card-content {
+    @apply p-4 bg-white;
+  }
+
+  .comic-card-label {
+    @apply font-bold text-blue-800;
+    font-family: "Bangers", cursive;
+  }
+
+  .comic-card-description {
+    @apply mt-2 text-gray-800;
+  }
+
+  .comic-button {
+    font-family: "Bangers", cursive;
+    @apply mt-3 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1 px-4 rounded-none text-center inline-block cursor-pointer;
+    border: 2px solid black;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 0 #000;
+    transition: all 0.2s ease;
+  }
+
+  .comic-button:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 5px 5px 0 #000;
+  }
+
+  .comic-info {
+    @apply mb-2 p-1;
+    border-bottom: 1px dashed #000;
+  }
+
+  /* Comic speech bubble for error */
+  .comic-error {
+    @apply p-6 mx-auto max-w-md relative bg-white;
+    border: 3px solid black;
+    border-radius: 30px;
+    box-shadow: 5px 5px 0 #000;
+  }
+
+  .comic-error:before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 40px;
+    border-width: 20px 0 0 20px;
+    border-style: solid;
+    border-color: black transparent;
+    display: block;
+    width: 0;
+  }
+
+  .comic-error:after {
+    content: "";
+    position: absolute;
+    bottom: -13px;
+    left: 44px;
+    border-width: 13px 0 0 13px;
+    border-style: solid;
+    border-color: white transparent;
+    display: block;
+    width: 0;
+  }
+
+  /* POW effect for hover */
+  .pow-effect {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background-color: #ff5252;
+    color: white;
+    font-family: "Bangers", cursive;
+    padding: 10px 15px;
+    border-radius: 50%;
+    transform: rotate(15deg);
+    font-size: 1.2rem;
+    border: 2px solid black;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 1px 1px 0 #000;
+    z-index: 10;
+  }
+
+  .comic-card:hover .pow-effect {
+    opacity: 1;
+  }
+
+  .add-hero-button {
+    @apply fixed bottom-20 right-8 w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center cursor-pointer;
+    border: 3px solid black;
+    box-shadow: 4px 4px 0 #000;
+    transition: all 0.2s ease;
+  }
+
+  .add-hero-button:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  .add-hero-button::before {
+    content: "+";
+    @apply text-4xl font-bold;
+    font-family: "Bangers", cursive;
+  }
+
+  .add-hero-button:active {
+    transform: scale(0.95) rotate(-5deg);
+    box-shadow: 2px 2px 0 #000;
+  }
+
+}

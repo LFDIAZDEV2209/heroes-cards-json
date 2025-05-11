@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heroes Cards</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="globals.css">
+  <script defer type="module" src="/src/main.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <header class="search-container">
+    <h1 class="text-3xl font-bold text-white text-center mb-4">Heroes Cards</h1>
+    <div class="max-w-md mx-auto">
+      <search-bar class="block w-full"></search-bar>
+      <filter-bar></filter-bar>
+    </div>
+  </header>
+  <main class="heroes-container">
+    <cards-component class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full"></cards-component>
+  </main>
+  <hero-add></hero-add>
+  <footer class="absolute bottom-0 left-0 right-0 bg-blue-600 text-white p-4 text-center border-black">
+    <p>Heroes Cards © 2025 - Todos los derechos reservados</p>
+  </footer>
+</body>
+</html>
