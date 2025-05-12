@@ -1,9 +1,16 @@
+import { getSearchHero } from '../services/heroesServices';
+
 export class SearchBar extends HTMLElement {
     constructor() {
         super();
     }
 
     connectedCallback() {
+        this.render();
+        this.setupEventListeners();
+    }
+
+    render() {
         this.innerHTML = `
             <div class="search-bar flex justify-center items-center gap-2 p-4">
                 <input 
@@ -16,19 +23,57 @@ export class SearchBar extends HTMLElement {
                     Buscar
                 </button>
             </div>
-        `
+        `;
     }
 
-    searchHero() {
+    setupEventListeners() {
         const searchInput = this.querySelector('input');
-        const searchQuery = searchInput.value;
+        const searchButton = this.querySelector('.comic-button');
+
+        // Buscar al hacer clic en el botón
+        searchButton.addEventListener('click', () => this.searchHero());
+
+        // Buscar al presionar Enter en el input
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.searchHero();
+            }
+        });
+
+        // Buscar mientras se escribe
+        searchInput.addEventListener('input', (e) => {
+            this.searchHero();
+        });
+    }
+
+    async searchHero() {
+        const searchInput = this.querySelector('input');
+        const searchQuery = searchInput.value.trim();
         
-        if (searchQuery.trim() === '') {
-            console.log('No se puede buscar un héroe sin un nombre');
+        if (searchQuery === '') {
+            // Si el input está vacío, mostrar todos los héroes
+            const event = new CustomEvent('search-results', {
+                detail: { heroes: [] },
+                bubbles: true,
+                composed: true
+            });
+            this.dispatchEvent(event);
             return;
         }
         
-        // Idea para crear un endpoint para buscar el heroe por nombre
+        try {
+            const heroes = await getSearchHero(searchQuery);
+            
+            // Disparar un evento personalizado con los resultados
+            const event = new CustomEvent('search-results', {
+                detail: { heroes },
+                bubbles: true,
+                composed: true
+            });
+            this.dispatchEvent(event);
+        } catch (error) {
+            console.error('Error al buscar héroes:', error);
+        }
     }
 }
 

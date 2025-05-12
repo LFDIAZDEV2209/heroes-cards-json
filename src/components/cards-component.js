@@ -1,18 +1,77 @@
 import { getHeroes } from "../services/heroesServices";
 import "./show-more.js";
+import "./search-bar.js";
 
-export class CardComponent extends HTMLElement {
+export class CardsComponent extends HTMLElement {
     constructor() {
         super();
-        this.render();
+        this.heroes = [];
     }
 
-    async render() {
+    async connectedCallback() {
+        this.render();
+        await this.loadHeroes();
+        this.setupEventListeners();
+    }
+
+    async loadHeroes() {
         try {
-            const heroes = await getHeroes();
+            this.heroes = await getHeroes();
+            this.renderCards();
+        } catch (error) {
+            console.error('Error al cargar los héroes:', error);
+            this.showError();
+        }
+    }
+
+    setupEventListeners() {
+        // Escuchar el evento de búsqueda
+        const searchBar = this.querySelector('search-bar');
+        if (searchBar) {
+            searchBar.addEventListener('search-results', (event) => {
+                if (event.detail.heroes && event.detail.heroes.length > 0) {
+                    this.heroes = event.detail.heroes;
+                    this.renderCards();
+                } else {
+                    this.loadHeroes();
+                }
+            });
+        }
+    }
+
+    render() {
+        this.innerHTML = `
+            <header class="search-container">
+                <h1 class="text-3xl font-bold text-white text-center mb-4">Heroes Cards</h1>
+                <div class="max-w-md mx-auto">
+                    <search-bar class="block w-full"></search-bar>
+                    <filter-bar></filter-bar>
+                </div>
+            </header>
+            <div class="cards-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full"></div>
+        `;
+    }
+
+    renderCards() {
+        try {
+            const cardsGrid = this.querySelector('.cards-grid');
+            if (!cardsGrid) return;
+
             const comicEffects = ["POW!", "BAM!", "ZOOM!", "WHAM!", "BOOM!", "ZAP!"]
 
-            this.innerHTML = heroes
+            if (this.heroes.length === 0) {
+                cardsGrid.innerHTML = `
+                    <div class="col-span-full flex justify-center items-center p-8">
+                        <div class="comic-error">
+                            <p class="font-bold text-xl text-center" style="font-family: 'Bangers', cursive;">¡OOPS!</p>
+                            <p class="text-center">No se encontraron héroes que coincidan con tu búsqueda.</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            cardsGrid.innerHTML = this.heroes
                 .map((hero, index) => {
                     const randomEffect = comicEffects[Math.floor(Math.random() * comicEffects.length)]
 
@@ -35,8 +94,15 @@ export class CardComponent extends HTMLElement {
                     `
                 }).join('');
         } catch (error) {
-            console.error('Error al cargar los héroes:', error);
-            this.innerHTML = `
+            console.error('Error al renderizar las tarjetas:', error);
+            this.showError();
+        }
+    }
+
+    showError() {
+        const cardsGrid = this.querySelector('.cards-grid');
+        if (cardsGrid) {
+            cardsGrid.innerHTML = `
                 <div class="col-span-full flex justify-center items-center p-8">
                     <div class="comic-error">
                         <p class="font-bold text-xl text-center" style="font-family: 'Bangers', cursive;">¡OOPS! ERROR</p>
@@ -48,4 +114,4 @@ export class CardComponent extends HTMLElement {
     }
 }
 
-customElements.define('cards-component', CardComponent);
+customElements.define('cards-component', CardsComponent);

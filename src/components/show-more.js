@@ -9,7 +9,6 @@ export class ShowMore extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log('ShowMore connected');
         this.eventListeners();
     }
 

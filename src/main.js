@@ -1,4 +1,4 @@
-import { SearchBar } from "./components/search-bar";
-import { HeroAdd } from "./components/hero-add";
-import { CardComponent } from "./components/cards-component";
-import { FilterBar } from "./components/filter-bar";
+import "./components/search-bar.js";
+import "./components/hero-add.js";
+import  "./components/cards-component.js";
+import  "./components/filter-bar.js";

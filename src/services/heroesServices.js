@@ -60,3 +60,28 @@ export const deleteHero = async (id) => {
         throw error;
     }
 }
+
+export const getSearchHero = async (searchTerm) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/heroes`);
+        if (response.status === 200) {
+            const data = await response.json();
+            const lower = searchTerm.toLowerCase();
+            return data.filter(hero =>
+                hero.name.toLowerCase().includes(lower) ||
+                hero.alias.toLowerCase().includes(lower) ||
+                (hero.house && hero.house.toLowerCase().includes(lower))
+            );
+        } else if (response.status === 401) {
+            console.error('Url is not valid');
+        } else if (response.status === 404) {
+            console.error('Url is not found');
+        } else if (response.status === 500) {
+            console.error('Internal server error');
+        } else {
+            console.error('Something went wrong');
+        }
+    } catch (error) {
+        console.error('Error searching hero:', error.message);
+    }
+}
