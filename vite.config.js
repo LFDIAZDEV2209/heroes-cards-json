@@ -8,7 +8,7 @@ export default defineConfig(({mode}) => {
         tailwindcss(),
     ],
     build: {
-        outDir: "./wwwroot/app/",
+        outDir: "dist",
         sourcemap: true,
     },
     server: {
